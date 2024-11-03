@@ -74,8 +74,8 @@ export const Signin = async (req, res, next) => {
     const { password: hashedPassword, ...rest } = user._doc;
     const tokenOption = {
       httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "strict",
+      secure: true,
+      sameSite: "none",
       maxAge: age,
     };
 
@@ -101,12 +101,12 @@ export const googleSignin = async (req, res, next) => {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, {
         expiresIn: age,
       });
-      const tokenOption = {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== "development",
-        sameSite: "strict",
-        maxAge: age,
-      };
+     const tokenOption = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: age,
+    };
 
       return res.cookie("token", token, tokenOption).json({
         success: true,
@@ -133,12 +133,12 @@ export const googleSignin = async (req, res, next) => {
         expiresIn: age,
       });
 
-      const tokenOption = {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== "development",
-        sameSite: "strict",
-        maxAge: age,
-      };
+   const tokenOption = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: age,
+    };
 
       res.cookie("token", token, tokenOption).json({
         success: true,
